@@ -189,6 +189,14 @@ config/fancymenu/assets/pack-version.txt
 # dotenv
 .env
 
+# direnv
+/.direnv
+!/.envrc
+
+# nix
+!/flake.nix
+!/flake.lock
+
 ### https://raw.github.com/github/gitignore/cc542de017c606138a87ee4880e5f06b3a306def/Global/Linux.gitignore
 *~
 
