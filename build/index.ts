@@ -98,16 +98,21 @@ export const BuildModlistTarget = new Juke.Target({
     }
 })
 
+export const ForceRmParameter = new Juke.Parameter({
+    type: 'boolean',
+    alias: 'f'
+})
+
 export const UpdateModsFolder = new Juke.Target({
 
     dependsOn: [DownloadModsTarget],
     outputs: () => ([
         "mods/"
     ]),
-    executes: () => {
+    executes: ({ get }) => {
         try {
             // Nuking mods folder before re-adding them in order to stay up to date
-            if(fs.existsSync("mods/")) fs.rmdirSync("mods/", { recursive: true })
+            if (fs.existsSync("mods/") && get(ForceRmParameter)) fs.rmdirSync("mods/", { recursive: true })
             fs.mkdirSync("mods/", { recursive: true })
             cpMods("mods/")
         } catch (error) {
